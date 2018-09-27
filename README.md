@@ -53,20 +53,17 @@ npm install
 >#### POST - Add an Artist
 - Endpoint: `/artists`
 - Description: Adds a new artist to the database
-
-
+<br>
 
 >#### PUT - Update an Artist
 - Endpoint: `/artists/:artistID`
 - Description: Updates all information related to an artist
-
-
+<br>
 
 >#### PATCH - Update/Add a Song to Library
 - Endpoint: `/artists/:artistID/albums/:albumID/songs/:songID`
 - Description: Add song to the user's library
-
-
+<br>
 
 >#### DELETE - Deletes an Artist
 - Endpoint: `artist/:artistID`
