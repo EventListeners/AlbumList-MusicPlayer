@@ -44,23 +44,28 @@ npm install
 - Endpoint: `/artists/:artistID`
 - Description: Gets all the information related to a given artist, including all songs
 
-#### GET - Get an Artist's Album
+
+>#### GET - Get an Artist's Album
 - Endpoint: `/artists/:artistID/albums/:albumID`
 - Description: Gets all the information related to an artist's album
 
-#### POST - Add an Artist
+
+>#### POST - Add an Artist
 - Endpoint: `/artists`
 - Description: Adds a new artist to the database
 
-#### PUT - Update an Artist
+
+>#### PUT - Update an Artist
 - Endpoint: `/artists/:artistID`
 - Description: Updates all information related to an artist
 
-#### PATCH - Update/Add a Song to Library
+
+>#### PATCH - Update/Add a Song to Library
 - Endpoint: `/artists/:artistID/albums/:albumID/songs/:songID`
 - Description: Add song to the user's library
 
-#### DELETE - Deletes an Artist
+
+>#### DELETE - Deletes an Artist
 - Endpoint: `artist/:artistID`
 - Description: Deletes an artist from the database
 
