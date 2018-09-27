@@ -1,6 +1,6 @@
-# dotThen
+# EventListeners
 
-> An attempt at replicating Spotify's Artist page UI 
+> Music streaming web application 
 
 ## Related Projects
 
@@ -14,6 +14,7 @@
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
+1. [API](#api)
 
 ## Usage
 
