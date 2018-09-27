@@ -40,10 +40,9 @@ npm install
 
 ## API
 
-#### GET - Get an Artist
-> Endpoint: `/artists/:artistID`
-
-> Description: Gets all the information related to a given artist, including all songs
+##### GET - Get an Artist
+- Endpoint: `/artists/:artistID`
+- Description: Gets all the information related to a given artist, including all songs
 
 #### GET - Get an Artist's Album
 > Endpoint: `/artists/:artistID/albums/:albumID`
