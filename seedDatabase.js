@@ -6,7 +6,8 @@ const coolImages = require('cool-images');
 
 var allArtists = [];
 
-for (let i = 1; i < 101; i++) {
+for (let i = 1; i < 3; i++) {
+// for (let i = 1; i < 101; i++) {
   let artist = {
     artistID: i,
     artistName: faker.name.findName(),
@@ -38,7 +39,8 @@ for (let i = 1; i < 101; i++) {
   allArtists.push(artist);
 }
 
-fs.writeFile('data.json', JSON.stringify(allArtists), 'utf8', (err) => {
+// fs.writeFile('data.json', JSON.stringify(allArtists), 'utf8', (err) => {
+  fs.writeFile('data.csv', JSON.stringify(allArtists), 'utf8', (err) => {
   if (err) throw err;
   console.log("File written!");
   Artist.remove({}, function(err) {
