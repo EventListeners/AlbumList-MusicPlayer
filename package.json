@@ -34,12 +34,15 @@
     "mongodb": "^3.1.4",
     "mongoose": "^5.2.10",
     "nodemon": "^1.18.4",
+    "pg": "^7.4.3",
+    "pg-copy-streams": "^1.2.0",
     "rc-dropdown": "^2.2.0",
     "rc-menu": "^7.4.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-flexbox-grid": "^2.1.2",
-    "react-test-renderer": "^16.5.0"
+    "react-test-renderer": "^16.5.0",
+    "sequelize": "^4.39.0"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
