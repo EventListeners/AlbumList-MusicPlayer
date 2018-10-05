@@ -27,6 +27,9 @@ CREATE TABLE IF NOT EXISTS songs (
    FOREIGN KEY (songs_albumID) REFERENCES albums(albumID)
 );
 
+CREATE INDEX albums_index ON ALBUMS (albums_artistID);
+CREATE INDEX songs_index ON SONGS (songs_albumID);
+
 
 
 

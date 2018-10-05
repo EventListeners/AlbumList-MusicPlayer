@@ -12,7 +12,7 @@ const PG = {
 
 const conString = `postgresql://${PG.user}:${PG.pass}@${PG.host}:${PG.port}/${PG.db}`
 
-const copyIntoTable = (tableName, cols, ind, t1) => new Promise((resolve, reject) => {
+const copyIntoTable = (tableName, cols, t1) => new Promise((resolve, reject) => {
 
   const client = new Client({
     connectionString: conString,
@@ -21,7 +21,7 @@ const copyIntoTable = (tableName, cols, ind, t1) => new Promise((resolve, reject
   client.connect();
 
   var stream = client.query(copyFrom(`COPY ${tableName} ${cols} FROM STDIN DELIMITER ',' CSV`));
-  var fileStream = fs.createReadStream(`../../seedScripts/scriptData/${t1 + ind}.csv`);
+  var fileStream = fs.createReadStream(`../../seedScripts/scriptData/${t1}.csv`);
 
   fileStream.on('error', (error) =>{
     reject(`Error in reading file: ${error}`);
@@ -36,15 +36,13 @@ const copyIntoTable = (tableName, cols, ind, t1) => new Promise((resolve, reject
   fileStream.pipe(stream);
 });
 
-const copyManyCSV = async (tableName, colName, t1, first, last) => {
-  for (let i = first; i <= last; i++) {
-    await copyIntoTable(tableName, colName, i, t1);
-  }
+const copyManyCSV = async (tableName, colName, t1) => {
+    await copyIntoTable(tableName, colName, t1);
 };
 
 //Artists
-// copyManyCSV('artists', '(artistID,artistName)', 'artist_data', 1, 11);
+// copyManyCSV('artists', '(artistID,artistName)', 'artist_data');
 //Albums
-// copyManyCSV('albums', '(albumID,albumName,albumImage,publishedYear,albums_artistID)', 'albums_data', 1, 31);
+// copyManyCSV('albums', '(albumID,albumName,albumImage,publishedYear,albums_artistID)', 'albums_data');
 //Songs
-copyManyCSV('songs', '(songID,songName,streams,songLength,popularity,addedToLibrary,songs_albumID)', 'songs_data', 1, 31);
+copyManyCSV('songs', '(songID,songName,streams,songLength,popularity,addedToLibrary,songs_albumID)', 'songs_data');

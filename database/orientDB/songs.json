@@ -1,0 +1,20 @@
+{
+    "source": { "file": { "path": "../songs_data.csv" } },
+    "extractor": { "csv": {} },
+    "transformers": [
+      { "vertex": { "class": "Song" } },
+      { "edge": { "class": "HasSong",  "joinFieldName": "songs_albumID", "lookup": "Album.albumID" } }
+    ],
+    "loader": {
+      "orientdb": {
+         "dbURL": "plocal:../databases/spotify",
+         "dbType": "graph",
+         "classes": [
+           {"name": "Song", "extends": "V"},
+           {"name": "HasSong", "extends": "E"}
+         ], "indexes": [
+           {"class":"Song", "fields":["songID:integer"], "type":"UNIQUE" }
+         ]
+      }
+    }
+  }

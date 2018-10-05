@@ -1,0 +1,19 @@
+{
+    "source": { "file": { "path": "../artist_data.csv"} },
+    "extractor": { "csv": {} },
+    "transformers": [
+      { "vertex": { "class": "Artists" } }
+    ],
+    "loader": {
+      "orientdb": {
+         "dbURL": "plocal:../databases/spotify",
+         "dbAutoCreate": true,
+         "dbType": "graph",
+         "classes": [
+           {"name": "Artists", "extends": "V"}
+         ], "indexes": [
+           {"class":"Artists", "fields":["artistID:integer"], "type":"UNIQUE" }
+         ]
+      }
+    }
+  }
