@@ -2,6 +2,8 @@ const fs = require('fs');
 const { Client } = require('pg');
 const copyFrom = require('pg-copy-streams').from;
 
+console.time('Script Time: ');
+
 const PG = {
   "host": "localhost",
   "user": "postgres",
@@ -34,6 +36,7 @@ const copyIntoTable = (tableName, cols, t1) => new Promise((resolve, reject) => 
     client.end(resolve);
   });
   fileStream.pipe(stream);
+  console.timeEnd('Script Time: ');
 });
 
 const copyManyCSV = async (tableName, colName, t1) => {

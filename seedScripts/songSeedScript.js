@@ -3,6 +3,8 @@ const fs = require('fs');
 
 var randomfunc = async () => {
 
+console.time('Script Time: ');
+
 let dataSongs;
 let songsCounter = 0;
 let albumsCounter = 0;
@@ -48,6 +50,7 @@ for (let i = startArtist; i <= numberArtists; i++) {
 
 streamSongs.end(() => {
     console.log('songs created');
+    console.timeEnd('Script Time: ');
 });
 
 };

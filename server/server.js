@@ -1,46 +1,62 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Artist = require('../database/index.js');
 const cors = require('cors');
 const server = express();
+const {getArtist, postArtist, updateArtist, deleteArtist} = require('../database/index.js');
 
-server.use(bodyParser.json());
+// parse application/x-www-form-urlencoded
+server.use(bodyParser.urlencoded({ extended: false }));
+//server.use(express.urlencoded({ extended: true }));
+// parse application/json
+server.use( bodyParser.json() );
+
 server.use(cors());
-server.use(express.urlencoded({ extended: true }));
 server.use(express.static(path.join(__dirname, '../public')));
 
 
 server.get('/artists/:artistID', (req, res) => {
-  Artist.find({'artistID': req.params.id})
-    .then(artist => res.json(artist))
-    .catch(err => console.log(err));
+  getArtist(req.params.artistID, (error, data) => {
+    if (error) {
+      res.status(400).send(error);
+    } else {
+      res.json(data.rows);
+    }
+  });
 });
 
-
 server.post('/artists', (req, res) => {
-  let newArtist = new Artist(req.body);
-  newArtist.save()
-    .then(() => res.status(201).json({message:"Successfully Added"}))
-    .catch(() => res.status(400).end(error));
+  postArtist(req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(201).send({message: data});
+    }
+  });
 });
 
 
 server.put('/artists/:artistID', (req, res) => {
-  Artist.updateOne({ artistID: req.params.id }, { $set: req.body })
-    .then(res.json({message:"Successfully Updated"}))
-    .catch(() => res.status(400).end(error));
+  const artistID = req.params.artistID;
+  updateArtist(artistID, req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(202).send({message: data});
+    }
+  });
 });
 
 
 server.delete('/artists/:artistID', (req, res) => {
-  Artist.deleteOne({ artistID: req.params.id })
-    .then(res.json({message:"Successfully Deleted"}))
-    .catch(() => res.status(400).end(error));
+  const artistID = req.params.artistID;
+  deleteArtist(artistID, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(202).send({message: data});
+    }
+  });
 });
-
-
-
-
 
 module.exports = server;

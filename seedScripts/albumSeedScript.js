@@ -1,6 +1,8 @@
 const faker = require('faker');
 const fs = require('fs');
 
+console.time('Script Time: ');
+
 let dataAlbums;
 let albumsCounter = 0;
 let streamAlbums = fs.createWriteStream(`./scriptData/albums_data.csv`);
@@ -34,6 +36,7 @@ for (let i = 1; i <= numberArtists; i++) {
 
 streamAlbums.end(() => {
     console.log('albums created');
+    console.timeEnd('Script Time: ');
 });
 
 
