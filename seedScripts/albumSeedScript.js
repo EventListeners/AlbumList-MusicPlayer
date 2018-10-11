@@ -10,12 +10,12 @@ console.log(`new file created: albums_data.csv`);
 
 //------------EDIT------------
 const numberArtists = 10000000;
-const numberAlbums = 1;
+const numberAlbums = 3;
 //----------------------------
 
 // --------- HEADER ---------- 
-dataAlbums = 'albumID,albumName,albumImage,publishedYear,albums_artistID\n';
-streamAlbums.write(dataAlbums);
+// dataAlbums = 'albumID,albumName,albumImage,publishedYear,albums_artistID\n';
+// streamAlbums.write(dataAlbums);
 
 for (let i = 1; i <= numberArtists; i++) {
 

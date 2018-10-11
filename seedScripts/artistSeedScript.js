@@ -13,8 +13,8 @@ const numberArtists = 10000000;
 //----------------------------
 
 // --------- HEADER ---------- 
-dataArtists = 'artistID,artistName\n';
-streamArtist.write(dataArtists);
+// dataArtists = 'artistID,artistName\n';
+// streamArtist.write(dataArtists);
 
 for (let i = 1; i <= numberArtists; i++) {
 

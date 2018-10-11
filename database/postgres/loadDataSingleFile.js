@@ -2,14 +2,12 @@ const fs = require('fs');
 const { Client } = require('pg');
 const copyFrom = require('pg-copy-streams').from;
 
-console.time('Script Time: ');
-
 const PG = {
-  "host": "localhost",
-  "user": "postgres",
+  "host": "13.59.204.152",
+  "user": "power_user",
   "db": "spotify",
   "port": "5432",
-  "pass": "student123"
+  "pass": "$poweruserpassword"
 };
 
 const conString = `postgresql://${PG.user}:${PG.pass}@${PG.host}:${PG.port}/${PG.db}`
@@ -40,12 +38,14 @@ const copyIntoTable = (tableName, cols, t1) => new Promise((resolve, reject) => 
 });
 
 const copyManyCSV = async (tableName, colName, t1) => {
-    await copyIntoTable(tableName, colName, t1);
+  console.time('Script Time: ');
+  await copyIntoTable(tableName, colName, t1);
+  console.timeEnd('Script Time: ');
 };
 
 //Artists
-// copyManyCSV('artists', '(artistID,artistName)', 'artist_data');
+//copyManyCSV('artists', '(artistID,artistName)', 'artist_data');
 //Albums
-// copyManyCSV('albums', '(albumID,albumName,albumImage,publishedYear,albums_artistID)', 'albums_data');
+ copyManyCSV('albums', '(albumID,albumName,albumImage,publishedYear,albums_artistID)', 'albums_data1');
 //Songs
-copyManyCSV('songs', '(songID,songName,streams,songLength,popularity,addedToLibrary,songs_albumID)', 'songs_data');
+//copyManyCSV('songs', '(songID,songName,streams,songLength,popularity,addedToLibrary,songs_albumID)', 'songs_data');
