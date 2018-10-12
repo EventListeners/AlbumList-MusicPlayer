@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS spotify;
+CREATE DATABASE spotify;
 USE spotify;
 
 

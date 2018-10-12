@@ -1,21 +1,5 @@
 const { Pool } = require('pg');
 
-/*
-const redis = require('redis');
-const redisUrl = 'redis://127.0.0.1:6379';
-const client = redis.createClient(redisUrl);
-const util = require('util');
-client.hget = util.promisify(client.hget);
-
-const cacheFunc = async function(artistID, sql) {
-  console.log('cache func call')
-  const hashKey = JSON.stringify(artistID); 
-  const key = JSON.stringify(sql);  
-  const cachedValue = await client.hget(hashKey, key);
-  return cachedValue ? JSON.parse(cachedValue) : null
-};
-*/
-
 // const connection = new Pool({
 //   "host": "localhost",
 //   "user": "postgres",
@@ -26,7 +10,8 @@ const cacheFunc = async function(artistID, sql) {
 
 const connection = new Pool({
   user: 'power_user',
-  host: '18.191.102.59',
+  host: '18.221.228.110', //public
+  //host: '172.31.41.198', //private
   database: 'spotify',
   password: '$poweruserpassword',
   port: 5432,
@@ -34,45 +19,20 @@ const connection = new Pool({
 
 
 const getArtist = function (artistID, callback) {
- 
-  // const sql = 
-  //   `SELECT * 
-  //   FROM artists 
-  //   INNER JOIN albums ON artists.artistID=albums.albums_artistID 
-  //   INNER JOIN songs ON albums.albumID=songs.songs_albumID 
-  //   WHERE artists.artistID = ${artistID}`;
-
   const sql = 
     `SELECT * 
-    FROM artists
+    FROM artists 
+    INNER JOIN albums ON artists.artistID=albums.albums_artistID 
+    INNER JOIN songs ON albums.albumID=songs.songs_albumID 
     WHERE artists.artistID = ${artistID}`;
 
-  connection.query(sql)
+    connection.query(sql)
       .then(data => callback(null, data))
       .catch(err => callback(err, null));
-
-/*
-  const cache = cacheFunc(artistID, sql);
-
-  console.log(cache)
-  
-  if (cache) {
-    console.log('caching');
-    callback(null, cache);
-  } else {
-    console.log('postgres query');
-    connection.query(sql)
-      .then(data => {
-        client.hset(artistID, sql, JSON.stringify(data));
-        callback(null, data);
-      })
-      .catch(err => callback(err, null));
-  }
-*/
 };
 
 const postArtist = (artist, callback) => {
-  client.del(JSON.stringify(artist.artistID));
+  //client.del(JSON.stringify(artist.artistID));
   const sql = `INSERT INTO artists (artistID, artistName) VALUES (${artist.artistID}, '${artist.artistName}')`;
   connection.query(sql)
     .then(() => callback(null, `New artist added to database ${artist.artistID}`))
@@ -80,7 +40,7 @@ const postArtist = (artist, callback) => {
 };
 
 const updateArtist = (artistID, newArtist, callback) => {
-  client.del(JSON.stringify(artistID));
+  //client.del(JSON.stringify(artistID));
   const sql = 
     `UPDATE artists 
     SET (artistName) = (${newArtist.artistName})
@@ -91,7 +51,7 @@ const updateArtist = (artistID, newArtist, callback) => {
 };
 
 const deleteArtist = (artistID, callback) => {
-  client.del(JSON.stringify(artistID));
+  //client.del(JSON.stringify(artistID));
   const query = 
     `DELETE FROM artists
     WHERE artistID = ${artistID}`;

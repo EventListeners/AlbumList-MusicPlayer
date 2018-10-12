@@ -3,7 +3,7 @@ const { Client } = require('pg');
 const copyFrom = require('pg-copy-streams').from;
 
 const PG = {
-  "host": "13.59.204.152",
+  "host": "18.191.102.59",
   "user": "power_user",
   "db": "spotify",
   "port": "5432",
@@ -46,6 +46,6 @@ const copyManyCSV = async (tableName, colName, t1) => {
 //Artists
 //copyManyCSV('artists', '(artistID,artistName)', 'artist_data');
 //Albums
- copyManyCSV('albums', '(albumID,albumName,albumImage,publishedYear,albums_artistID)', 'albums_data1');
+ //copyManyCSV('albums', '(albumID,albumName,albumImage,publishedYear,albums_artistID)', 'albums_data1');
 //Songs
-//copyManyCSV('songs', '(songID,songName,streams,songLength,popularity,addedToLibrary,songs_albumID)', 'songs_data');
+copyManyCSV('songs', '(songID,songName,streams,songLength,popularity,addedToLibrary,songs_albumID)', 'songs_data1');

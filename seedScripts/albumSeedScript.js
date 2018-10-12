@@ -10,7 +10,7 @@ console.log(`new file created: albums_data.csv`);
 
 //------------EDIT------------
 const numberArtists = 10000000;
-const numberAlbums = 3;
+const numberAlbums = 1;
 //----------------------------
 
 // --------- HEADER ---------- 
